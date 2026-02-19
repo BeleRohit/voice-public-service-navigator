@@ -6,11 +6,23 @@ import json
 from app.tts_engine import speak
 from app.response_engine import generate_response
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 
 
 load_dotenv()
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def health_check():
