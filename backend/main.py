@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 from app.sarvam_client import transcribe_audio
 from app.intent_engine import extract_intent
 import json
+from app.tts_engine import speak
+from app.response_engine import generate_response
+
 
 
 load_dotenv()
@@ -19,11 +22,8 @@ async def transcribe(file: UploadFile = File(...)):
     audio_bytes = await file.read()
     stt_result = transcribe_audio(audio_bytes)
 
-    #transcript = #stt_result.get("transcript")
-    transcript = "Mere pitaji ko saans lene mein dikkat ho rahi hai"
-
-
-    
+    transcript = stt_result.get("transcript")
+    language = stt_result.get("language_code", "hi-IN")
 
     raw_intent = extract_intent(transcript)
 
@@ -48,8 +48,15 @@ async def transcribe(file: UploadFile = File(...)):
         intent["urgency"] = "high"
         intent["override"] = "Emergency keywords detected"
 
+    response_text = generate_response(intent, language)
+    audio = speak(response_text, language)
+
+
 
     return {
-        "transcript": transcript,
-        "intent": intent
-    }
+    "transcript": transcript,
+    "intent": intent,
+    "response_text": response_text,
+    "audio_base64": audio
+}
+
