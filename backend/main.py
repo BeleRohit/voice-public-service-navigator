@@ -8,10 +8,6 @@ from app.response_engine import generate_response
 
 from fastapi.middleware.cors import CORSMiddleware
 
-
-
-
-
 load_dotenv()
 
 app = FastAPI()
