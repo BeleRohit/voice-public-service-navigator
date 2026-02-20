@@ -121,7 +121,9 @@ uvicorn main:app --reload
 ```
 
 Create a .env file:
+```bash
 SARVAM_API_KEY=your_api_key_here
+```
 
 
 ### 📌 Why This Exists
