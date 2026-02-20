@@ -108,6 +108,7 @@ Audio Response to User
 cd frontend
 npm install
 npm run dev
+```
 
 ---
 
@@ -117,6 +118,7 @@ npm run dev
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
+```
 
 Create a .env file:
 SARVAM_API_KEY=your_api_key_here
@@ -145,4 +147,6 @@ Streaming audio responses
 Domain-specific assistants
 
 ### 📄 License
+```bash
 MIT
+```
